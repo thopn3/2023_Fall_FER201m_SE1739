@@ -1,29 +1,26 @@
 // Sử dụng function để định nghĩa 1 component
-function Product({data}){
-
+function Product({id, name}){
     return (
-        <div>
+        <div className="item" key={id}>
+            <div className="img"></div>
+            <h3>{name}</h3>
+            <div className="price"></div>
+        </div>
+    )
+}
+
+function ProductList({data=[]}){
+    return (
+        <div className="container">
             <h2>List of products</h2>
-            <table border={1}>
-                <thead>
-                    <tr>
-                        <th>ID</th><th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {
-                    data.map(({id, name}) =>  (
-                        <tr key={id}>
-                            <td>{id}</td>
-                            <td>{name}</td>
-                        </tr>
-                    ))
-                }
-                </tbody>
-            </table>
+            {
+                data.map(({id, name})=>(
+                    <Product id={id} name={name}/>
+                ))
+            }
         </div>
     )
 }
 
 // Xuất bản component này (export module)
-export default Product
+export default ProductList
